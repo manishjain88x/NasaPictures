@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+// Used to navigate to details page
     private fun navigateToDetails(imageData: Int) {
         // val myList = ArrayList<ImageData>()
         // myList.addAll(viewModel.imagesLiveData.value!!)
