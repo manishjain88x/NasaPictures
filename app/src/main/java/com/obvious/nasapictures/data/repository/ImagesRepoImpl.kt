@@ -10,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.withContext
 import java.lang.reflect.Type
 
 class ImagesRepoImpl(
@@ -18,11 +17,11 @@ class ImagesRepoImpl(
     private val defaultDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ImagesRepo {
     override suspend fun getImages(): Flow<List<ImageData>> = flow {
-            val jsonString = loadJSONFromAsset()
-            val gson = Gson()
-            Log.i("ImagesRepoImpl thread", Thread.currentThread().name)
-            val type: Type = object : TypeToken<List<ImageData>>() {}.type
-            emit(gson.fromJson(jsonString, type) as List<ImageData>)
+        val jsonString = loadJSONFromAsset()
+        val gson = Gson()
+        Log.i("ImagesRepoImpl thread", Thread.currentThread().name)
+        val type: Type = object : TypeToken<List<ImageData>>() {}.type
+        emit(gson.fromJson(jsonString, type) as List<ImageData>)
         // return@withContext gson.fromJson(jsonString, type) as List<ImageData>
     }.flowOn(defaultDispatcher)
 
@@ -33,4 +32,16 @@ class ImagesRepoImpl(
         }
         return jsonString
     }
+
+
+    /* suspend fun getImages1(): List<ImageData> {
+         withContext(defaultDispatcher) {
+             val jsonString = loadJSONFromAsset()
+             val gson = Gson()
+             Log.i("ImagesRepoImpl thread", Thread.currentThread().name)
+             val type: Type = object : TypeToken<List<ImageData>>() {}.type
+             //  emit(gson.fromJson(jsonString, type) as List<ImageData>)
+             return@withContext gson.fromJson(jsonString, type) as List<ImageData>
+         }
+     }*/
 }
