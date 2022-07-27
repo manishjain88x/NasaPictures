@@ -5,7 +5,7 @@
 
         <variable
             name="imageData"
-            type="com.obvious.nasapictures.models.ImageData" />
+            type="com.obvious.nasapictures.data.models.ImageData" />
     </data>
 
     <ScrollView
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context=".ui.activities.MainActivity">
+            tools:context=".presentation.ui.activities.MainActivity">
 
             <ImageView
                 android:id="@+id/image"
